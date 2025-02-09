@@ -1,0 +1,98 @@
+# See: https://learn.openapis.org/specification/
+
+openapi: '3.0.3'
+info:
+  title: Book API
+  version: '1.0'
+servers:
+  - url: https://books.server/v1
+
+components:
+  # Reusable schema definitions.
+  schemas:
+    # An ID type
+    id:
+      type: integer
+    # A book type wrapping information about a book.
+    book:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        author:
+          type: string
+        price:
+          type: number
+    # A books type wrapping an array of book types.
+    books:
+      type: object
+      properties:
+        books:
+          type: array
+          items:
+            $ref: "#/components/schemas/book"
+  # Reusable parameter definitions.
+  parameters:
+    # reusable ID path parameter
+    id:
+      name: id
+      in: path
+      required: true
+      schema: 
+        $ref: "#/components/schemas/id"
+  # Reusabale security schemes.
+  securitySchemes:
+    BasicAuthentication:
+      description: "Basic Authentication Security Scheme." 
+      type: http
+      scheme: Basic
+
+paths:
+  # Read API (without authentication)
+  /books:
+    get:
+      description: 'Reads all books from the server (without paging).'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/books"
+
+  # Create API
+  /books/create:
+    post:
+      description: 'Creates a new book on the server.'
+      security:
+        - BasicAuthentication: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/book"
+      responses:
+        '201':
+          description: Created
+
+  # Deletion API  
+  /books/delete/{id}:
+    delete:
+      description: 'Delete book by ID.'
+      security:
+        - BasicAuthentication: []
+      parameters:
+        - $ref: "#/components/parameters/id"
+      responses:
+        '200':
+          description: OK
+
+# Apply Security Scheme globally
+# security:
+#  - BasicAuthentication: []
+
+
+
