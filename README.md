@@ -138,6 +138,7 @@ For more information, see [this issue](https://github.com/nektos/act/discussions
 
 **Github Actions:**
 
+* [Marketplace](https://github.com/marketplace)
 * [Quickstart](https://docs.github.com/en/actions/writing-workflows/quickstart)
 * [Understanding Workflows](https://docs.github.com/en/actions/writing-workflows/about-workflows#understanding-the-workflow-file)
 * [Workflow Syntax](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#about-yaml-syntax-for-workflows)

@@ -21,3 +21,9 @@ jobs:
           openapi-file: openapi.yaml
           generator: java
           config-file: generator-config-java.yaml
+
+      - name: Generate OpenAPI Documentation
+        uses: openapi-generators/openapitools-generator-action@v1
+        with:
+          openapi-file: openapi.yaml
+          generator: html2
