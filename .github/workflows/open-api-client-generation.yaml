@@ -18,5 +18,6 @@ jobs:
       - name: Generate Java Client
         uses: openapi-generators/openapitools-generator-action@v1
         with:
+          openapi-file: openapi.yaml
           generator: java
-          #config-file: java-client-generator-config.yaml
+          config-file: generator-config-java.yaml

@@ -1,0 +1,10 @@
+# See: https://openapi-generator.tech/docs/usage#configuration-file
+# See: https://openapi-generator.tech/docs/generators/java
+
+apiPackage: com.sap.books.client.api
+invokerPackage: com.sap.books.client
+modelPackage: com.sap.books.client.model
+groupId: com.sap.books
+artifactId: books-client-api
+artifactVersion: 1.0.0
+serializationLibrary: jackson
