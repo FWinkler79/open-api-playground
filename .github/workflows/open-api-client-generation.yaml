@@ -22,16 +22,17 @@ jobs:
           generator: java
           config-file: generator-config-java.yaml
 
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          java-version: 21
-          distribution: sapmachine # see: https://github.com/actions/setup-java?tab=readme-ov-file#supported-distributions
-          #cache: maven
-          #cache-dependency-path: ${{github.workspace}}/java-client/pom.xml
+      # Steps to build the generated Java Client.
+      # - name: Set up JDK
+      #   uses: actions/setup-java@v4
+      #   with:
+      #     java-version: 21
+      #     distribution: sapmachine # see: https://github.com/actions/setup-java?tab=readme-ov-file#supported-distributions
+      #     #cache: maven
+      #     #cache-dependency-path: ${{github.workspace}}/java-client/pom.xml
 
-      - name: Build with Maven
-        run: mvn -B clean package --no-transfer-progress --file java-client/pom.xml
+      # - name: Build with Maven
+      #   run: mvn -B clean package --no-transfer-progress --file java-client/pom.xml
 
   generate-documentation:
     runs-on: ubuntu-latest
@@ -47,18 +48,11 @@ jobs:
           openapi-file: openapi.yaml
           generator: html2
 
-  # release-java-client-lib:
-  #   runs-on: ubuntu-latest
-  #   name: Release Java Client Library
-  #   needs: generate-java-client       # wait for generate-java-client job to have finished.
-  #   steps:
-  #     - name: Set up JDK
-  #       uses: actions/setup-java@v4
-  #       with:
-  #         java-version: 21
-  #         distribution: sapmachine # see: https://github.com/actions/setup-java?tab=readme-ov-file#supported-distributions
-  #         #cache: maven
-  #         #cache-dependency-path: ${{github.workspace}}/java-client/pom.xml
+      - name: Create Documentation Release
+        uses: ncipollo/release-action@v1
+        with:
+          commit: ${{github.sha}} # see: https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/accessing-contextual-information-about-workflow-runs#github-context
+          artifacts: html2-client/index.html
+          artifactContentType: application/html
 
-  #     - name: Build with Maven
-  #       run: mvn -B clean package --no-transfer-progress --file java-client/pom.xml
+
