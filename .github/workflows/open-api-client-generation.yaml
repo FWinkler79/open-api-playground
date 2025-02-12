@@ -22,6 +22,11 @@ jobs:
           generator: java
           config-file: generator-config-java.yaml
 
+      - name: Zip Generated Client Sources
+        run: |
+          echo "Zipping generated Java client sources."
+          zip -9 java-client-src.zip java-client/
+
       # Steps to build the generated Java Client.
       # - name: Set up JDK
       #   uses: actions/setup-java@v4
@@ -50,6 +55,7 @@ jobs:
           openapi-file: openapi.yaml
           generator: html2
 
+      # see: https://github.com/marketplace/actions/create-release
       - name: Create Documentation Release
         uses: ncipollo/release-action@v1
         with:
