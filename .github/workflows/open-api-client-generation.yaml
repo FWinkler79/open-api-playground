@@ -27,7 +27,7 @@ jobs:
       - name: Zip Generated Client Sources
         run: |
           echo "Zipping generated Java client sources."
-          zip -9 java-client-src.zip java-client/**/*
+          zip -9 -r java-client-src.zip java-client
 
       # see: https://github.com/marketplace/actions/create-release
       - name: Create Java Client Sources Release
