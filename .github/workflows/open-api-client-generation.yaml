@@ -67,7 +67,7 @@ jobs:
           path: api-documentation.zip
 
   build-generated-java-client-sources:
-    name: Build Java Client Library.
+    name: Build Java Client Library
     runs-on: ubuntu-latest
     needs:
       - generate-java-client
