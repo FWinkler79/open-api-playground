@@ -3,8 +3,10 @@ run-name: OpenAPI Client Generator Github Action 🚀
 on: [push]
 jobs:
   generate-java-client:
-    runs-on: ubuntu-latest
     name: Generate Java Client
+    permissions:
+      contents: write # required for release action.
+    runs-on: ubuntu-latest
     steps:
 
       # Checkout your code
