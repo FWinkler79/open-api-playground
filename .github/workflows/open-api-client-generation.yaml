@@ -35,8 +35,10 @@ jobs:
       #   run: mvn -B clean package --no-transfer-progress --file java-client/pom.xml
 
   generate-documentation:
-    runs-on: ubuntu-latest
     name: Generate API Documentation
+    permissions:
+      contents: write # required for release action.
+    runs-on: ubuntu-latest
     steps:
       # Checkout your code
       - name: Checkout
