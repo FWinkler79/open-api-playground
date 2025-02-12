@@ -145,6 +145,7 @@ For more information, see [this issue](https://github.com/nektos/act/discussions
 **Github Actions:**
 
 * [Marketplace](https://github.com/marketplace)
+* [Official Actions](https://github.com/actions)
 * [Quickstart](https://docs.github.com/en/actions/writing-workflows/quickstart)
 * [Understanding Workflows](https://docs.github.com/en/actions/writing-workflows/about-workflows#understanding-the-workflow-file)
 * [Workflow Syntax](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#about-yaml-syntax-for-workflows)
@@ -166,6 +167,7 @@ For more information, see [this issue](https://github.com/nektos/act/discussions
 * [Triggering Workflows via REST API](https://docs.github.com/en/rest/repos/repos#create-a-repository-dispatch-event)
 * [Sharing Automation (Writing your own Actions)](https://docs.github.com/en/actions/sharing-automations)
 * [Hosting your own runners](https://docs.github.com/en/actions/hosting-your-own-runners)
+* [📺 Youtube-Series: Github Actions Pro Tips](https://www.youtube.com/playlist?list=PLtvmFy4Ed_DL4Vd2uup0ZT6o_HFSaF-yW)
 
 **Act:**
 * [Act](https://github.com/nektos/act)
