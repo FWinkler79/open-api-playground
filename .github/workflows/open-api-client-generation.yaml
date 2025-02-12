@@ -4,16 +4,12 @@ on: [push]
 jobs:
   generate-java-client:
     name: Generate Java Client
-    permissions:
-      contents: write # required for release action.
     runs-on: ubuntu-latest
     steps:
 
       # Checkout your code
       - name: Checkout
         uses: actions/checkout@v2
-
-      # Generate your OpenAPI document (if you don't write it manually)
 
       # Use the action to generate a client package
       # This uses the default path for the openapi document and thus assumes there is an openapi.json in the current workspace.
@@ -24,38 +20,31 @@ jobs:
           generator: java
           config-file: generator-config-java.yaml
 
+      # see: https://github.com/marketplace/actions/zip-release
       - name: Zip Generated Client Sources
-        run: |
-          echo "Zipping generated Java client sources."
-          zip -9 -r java-client-src.zip java-client
-
-      # see: https://github.com/marketplace/actions/create-release
-      - name: Create Java Client Sources Release
-        uses: ncipollo/release-action@v1
+        uses: thedoctor0/zip-release@0.7.6
         with:
-          tag: release
-          commit: ${{github.sha}} # see: https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/accessing-contextual-information-about-workflow-runs#github-context
-          artifacts: java-client-src.zip
-          artifactContentType: application/zip
-          allowUpdates: true
+          type: 'zip'
+          path: 'java-client'
+          filename: 'java-client-sources.zip'
+          exclusions: '/*node_modules/* .editorconfig'
 
+      # see: https://github.com/actions/upload-artifact
+      - name: Upload Generated Documentation
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-documentation.zip
+          path: api-documentation.zip
 
-      # Steps to build the generated Java Client.
-      # - name: Set up JDK
-      #   uses: actions/setup-java@v4
-      #   with:
-      #     java-version: 21
-      #     distribution: sapmachine # see: https://github.com/actions/setup-java?tab=readme-ov-file#supported-distributions
-      #     #cache: maven
-      #     #cache-dependency-path: ${{github.workspace}}/java-client/pom.xml
-
-      # - name: Build with Maven
-      #   run: mvn -B clean package --no-transfer-progress --file java-client/pom.xml
+      # see: https://github.com/actions/upload-artifact
+      - name: Upload Generated Java Client Sources
+        uses: actions/upload-artifact@v4
+        with:
+          name: java-client-sources.zip
+          path: java-client-sources.zip
 
   generate-documentation:
     name: Generate API Documentation
-    permissions:
-      contents: write # required for release action.
     runs-on: ubuntu-latest
     steps:
       # Checkout your code
@@ -67,15 +56,80 @@ jobs:
         with:
           openapi-file: openapi.yaml
           generator: html2
-
-      # see: https://github.com/marketplace/actions/create-release
-      - name: Create Documentation Release
-        uses: ncipollo/release-action@v1
+      
+      # see: https://github.com/marketplace/actions/zip-release
+      - name: Zip Generated Documentation
+        uses: thedoctor0/zip-release@0.7.6
         with:
-          tag: release
-          commit: ${{github.sha}} # see: https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/accessing-contextual-information-about-workflow-runs#github-context
-          artifacts: html2-client/index.html
-          artifactContentType: application/html
-          allowUpdates: true
+          type: 'zip'
+          path: 'html2-client'
+          filename: 'api-documentation.zip'
+          exclusions: '/*node_modules/* .editorconfig'
 
+      # see: https://github.com/actions/upload-artifact
+      - name: Upload Zipped Documentation
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-documentation.zip
+          path: api-documentation.zip
+
+  build-generated-java-client-sources:
+    name: Build Java Client Library.
+    runs-on: ubuntu-latest
+    needs:
+      - generate-java-client
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: java-client-sources.zip
+          path: downloaded-artifacts
+
+      - name: Unzip Java Client Sources
+        run: unzip downloaded-artifacts/java-client-sources.zip
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: sapmachine # see: https://github.com/actions/setup-java?tab=readme-ov-file#supported-distributions
+          #cache: maven
+          #cache-dependency-path: ${{github.workspace}}/java-client/pom.xml
+      
+      - name: Build with Maven
+        run: mvn -B clean package --no-transfer-progress --file java-client/pom.xml
+      
+      # see: https://github.com/actions/upload-artifact
+      - name: Upload Java Client Library
+        uses: actions/upload-artifact@v4
+        with:
+          name: java-client-build-artifacts
+          path: java-client/target/*.jar
+
+  create-release:
+    name: Create New Release
+    runs-on: ubuntu-latest
+    needs: 
+      - generate-java-client
+      - build-generated-java-client-sources
+      - generate-documentation
+    steps:
+      # see: https://github.com/actions/download-artifact
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: downloaded-artifacts
+      
+      - name: Display structure of downloaded files
+        run: ls -R
+
+      # # see: https://github.com/marketplace/actions/create-release
+      # - name: Create Release
+      #   uses: ncipollo/release-action@v1
+      #   with:
+      #     tag: release
+      #     commit: ${{github.sha}} # see: https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/accessing-contextual-information-about-workflow-runs#github-context
+      #     artifacts: html2-client/index.html
+      #     artifactContentType: application/html
+      #     allowUpdates: true
 
