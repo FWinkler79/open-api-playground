@@ -51,6 +51,7 @@ jobs:
       - name: Create Documentation Release
         uses: ncipollo/release-action@v1
         with:
+          tag: ${{github.ref_name}}
           commit: ${{github.sha}} # see: https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/accessing-contextual-information-about-workflow-runs#github-context
           artifacts: html2-client/index.html
           artifactContentType: application/html
