@@ -133,7 +133,6 @@ For more information, see [this issue](https://github.com/nektos/act/discussions
 
 * [OpenAPI Tools](https://openapi.tools/)
 * [Swagger Maven Plugin - Generate Open API Documents from Code](https://github.com/kongchen/swagger-maven-plugin) (not recommended, see *Best Practices* and *API Design First Approach*!)
-
 * [Text Editors](https://tools.openapis.org/categories/text-editors)
 * [GUI Editors](https://tools.openapis.org/categories/gui-editors)
 * [OpenAPI Generator Github Action](https://github.com/openapi-generators/openapitools-generator-action)
