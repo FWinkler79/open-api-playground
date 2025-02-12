@@ -25,7 +25,7 @@ jobs:
       - name: Zip Generated Client Sources
         run: |
           echo "Zipping generated Java client sources."
-          zip -9 java-client-src.zip java-client/
+          zip -9 java-client-src.zip java-client/**/*
 
       # Steps to build the generated Java Client.
       # - name: Set up JDK
@@ -59,7 +59,7 @@ jobs:
       - name: Create Documentation Release
         uses: ncipollo/release-action@v1
         with:
-          tag: ${{github.ref_name}}
+          tag: ${{github.sha}}
           commit: ${{github.sha}} # see: https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/accessing-contextual-information-about-workflow-runs#github-context
           artifacts: html2-client/index.html
           artifactContentType: application/html
