@@ -33,7 +33,7 @@ jobs:
       - name: Create Java Client Sources Release
         uses: ncipollo/release-action@v1
         with:
-          tag: release-${{ github.event.repository.updated_at}}
+          tag: release
           commit: ${{github.sha}} # see: https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/accessing-contextual-information-about-workflow-runs#github-context
           artifacts: java-client-src.zip
           artifactContentType: application/zip
@@ -72,7 +72,7 @@ jobs:
       - name: Create Documentation Release
         uses: ncipollo/release-action@v1
         with:
-          tag: release-${{ github.event.repository.updated_at}}
+          tag: release
           commit: ${{github.sha}} # see: https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/accessing-contextual-information-about-workflow-runs#github-context
           artifacts: html2-client/index.html
           artifactContentType: application/html
