@@ -30,17 +30,10 @@ jobs:
           exclusions: '/*node_modules/* .editorconfig'
 
       # see: https://github.com/actions/upload-artifact
-      - name: Upload Generated Documentation
-        uses: actions/upload-artifact@v4
-        with:
-          name: api-documentation.zip
-          path: api-documentation.zip
-
-      # see: https://github.com/actions/upload-artifact
       - name: Upload Generated Java Client Sources
         uses: actions/upload-artifact@v4
         with:
-          name: java-client-sources.zip
+          name: java-client-sources
           path: java-client-sources.zip
 
   generate-documentation:
@@ -70,7 +63,7 @@ jobs:
       - name: Upload Zipped Documentation
         uses: actions/upload-artifact@v4
         with:
-          name: api-documentation.zip
+          name: api-documentation
           path: api-documentation.zip
 
   build-generated-java-client-sources:
@@ -82,7 +75,7 @@ jobs:
       - name: Download Artifacts
         uses: actions/download-artifact@v4
         with:
-          name: java-client-sources.zip
+          name: java-client-sources
           path: downloaded-artifacts
 
       - name: Unzip Java Client Sources
