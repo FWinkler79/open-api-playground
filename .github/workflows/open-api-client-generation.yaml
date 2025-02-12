@@ -116,13 +116,84 @@ jobs:
       - name: Display structure of downloaded files
         run: ls -R
 
-      # # see: https://github.com/marketplace/actions/create-release
-      # - name: Create Release
-      #   uses: ncipollo/release-action@v1
-      #   with:
-      #     tag: release
-      #     commit: ${{github.sha}} # see: https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/accessing-contextual-information-about-workflow-runs#github-context
-      #     artifacts: html2-client/index.html
-      #     artifactContentType: application/html
-      #     allowUpdates: true
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: build-${{ github.run_number }}
+          release_name: Release-#${{ github.run_number }}
+
+      - name: Release API Documentation 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. 
+          # See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: downloaded-artifacts/api-documentation/api-documentation.zip
+          asset_name: api-documentation.zip
+          asset_content_type: application/zip
+      
+      - name: Release Java Client Library 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. 
+          # See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: downloaded-artifacts/java-client-build-artifacts/books-client-api-1.0.0.jar
+          asset_name: books-client-api-1.0.0.jar
+          asset_content_type: application/jar
+      
+      - name: Release Java Client Tests 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. 
+          # See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: downloaded-artifacts/java-client-build-artifacts/books-client-api-1.0.0-tests.jar
+          asset_name: books-client-api-1.0.0-tests.jar
+          asset_content_type: application/jar
+      
+      - name: Release Java Client Sources 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. 
+          # See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: downloaded-artifacts/java-client-build-artifacts/books-client-api-1.0.0-sources.jar
+          asset_name: books-client-api-1.0.0-sources.jar
+          asset_content_type: application/jar
+
+      - name: Release Java Client Javadoc 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. 
+          # See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: downloaded-artifacts/java-client-build-artifacts/books-client-api-1.0.0-javadoc.jar
+          asset_name: books-client-api-1.0.0-javadoc.jar
+          asset_content_type: application/jar
+
+      - name: Release Java Client Sources Zip 
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. 
+          # See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          upload_url: ${{ steps.create_release.outputs.upload_url }} 
+          asset_path: downloaded-artifacts/java-client-sources/java-client-sources.zip
+          asset_name: java-client-sources.zip
+          asset_content_type: application/zip
 
