@@ -49,6 +49,13 @@ jobs:
           openapi-file: openapi.yaml
           generator: java
           config-file: generator-config-java.yaml
+    
+      # Generate documentation
+      - name: Generate OpenAPI Documentation
+        uses: openapi-generators/openapitools-generator-action@v1
+        with:
+          openapi-file: openapi.yaml
+          generator: html2
 ```
 
 The `openapi-generator` can be customized with a configuration file as described [here](https://openapi-generator.tech/docs/usage#configuration-file). For the `java` generator, the following configuration properties exist that each can be provided via a `yaml` file. 

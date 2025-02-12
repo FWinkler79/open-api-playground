@@ -4,7 +4,7 @@ on: [push]
 jobs:
   generate-java-client:
     runs-on: ubuntu-latest
-    name: Books-Example
+    name: Generate Java Client
     steps:
 
       # Checkout your code
@@ -22,8 +22,31 @@ jobs:
           generator: java
           config-file: generator-config-java.yaml
 
+  generate-documentation:
+    runs-on: ubuntu-latest
+    name: Generate API Documentation
+    steps:
+      # Checkout your code
+      - name: Checkout
+        uses: actions/checkout@v2
+
       - name: Generate OpenAPI Documentation
         uses: openapi-generators/openapitools-generator-action@v1
         with:
           openapi-file: openapi.yaml
           generator: html2
+
+  release-java-client-lib:
+    runs-on: ubuntu-latest
+    name: Release Java Client Library
+    needs: generate-java-client       # wait for generate-java-client job to have finished.
+    steps:
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: sapmachine # see: https://github.com/actions/setup-java?tab=readme-ov-file#supported-distributions
+          cache: maven
+
+      - name: Build with Maven
+        run: mvn -B clean package --no-transfer-progress --file java-client/pom.xml
