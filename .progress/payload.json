@@ -1,0 +1,62 @@
+{
+    "serviceName" : "Identity and Authentication Service",
+    "serviceId" : "093274", 
+    "serviceInstanceId": "4711",
+    "tenantId": "customer tenant ID",
+
+    "settingsGroup" : "IAS_..._",
+
+    "settings": [
+      {
+        "type": "StringSetting",
+        "name": "mySetting",
+        "label": "My Setting",
+        "value": "some string value",
+        "complianceLevel": "compliant",             /* enum of: compliant, non-compliant, partially-compliant, etc. */
+        "securityRecommendationID": "BDC-124"
+      },
+      {
+        "type": "IntegerSetting",
+        "name": "retentionPeriodInDays",
+        "label": "Retention Period (Days)",
+        "value": 30,
+        "complianceLevel": "compliant",
+        "securityRecommendationID": "BDC-124"
+      },
+      {
+        "type": "NumberSetting",
+        "name": "myFloatingPointSetting",
+        "label": "Some Floating Point Value",
+        "value": 1.0,
+        "complianceLevel": "compliant",
+        "securityRecommendationID": "BDC-124"
+      },
+      {
+        "type": "ArraySetting",
+        "name": "MyArraySetting",
+        "label": "Some list of values.",
+        "value": [12, 15, "HelloWorld"],
+        "complianceLevel": "compliant",
+        "securityRecommendationID": "BDC-124"
+      },
+      {
+        "type": "ArraySetting",
+        "name": "MyArraySetting",
+        "label": "Some list of values.",
+        "value": [12, 15, "HelloWorld"],
+        "complianceLevel": "compliant",
+        "securityRecommendationID": "BDC-124"
+      },
+      {
+        "type": "CertificateSetting",
+        "name": "clien-certificate",
+        "label": "Client Certificate",
+        "value": {
+            "CN": "...",
+            "CA": "...",
+            "...": "..."
+        }
+      }
+      /* and more */ 
+    ]
+  }
