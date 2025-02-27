@@ -4,59 +4,73 @@
     "serviceInstanceId": "4711",
     "tenantId": "customer tenant ID",
 
-    "settingsGroup" : "IAS_..._",
-
-    "settings": [
-      {
-        "type": "StringSetting",
-        "name": "mySetting",
-        "label": "My Setting",
-        "value": "some string value",
-        "complianceLevel": "compliant",             /* enum of: compliant, non-compliant, partially-compliant, etc. */
-        "securityRecommendationID": "BDC-124"
-      },
-      {
-        "type": "IntegerSetting",
-        "name": "retentionPeriodInDays",
-        "label": "Retention Period (Days)",
-        "value": 30,
-        "complianceLevel": "compliant",
-        "securityRecommendationID": "BDC-124"
-      },
-      {
-        "type": "NumberSetting",
-        "name": "myFloatingPointSetting",
-        "label": "Some Floating Point Value",
-        "value": 1.0,
-        "complianceLevel": "compliant",
-        "securityRecommendationID": "BDC-124"
-      },
-      {
-        "type": "ArraySetting",
-        "name": "MyArraySetting",
-        "label": "Some list of values.",
-        "value": [12, 15, "HelloWorld"],
-        "complianceLevel": "compliant",
-        "securityRecommendationID": "BDC-124"
-      },
-      {
-        "type": "ArraySetting",
-        "name": "MyArraySetting",
-        "label": "Some list of values.",
-        "value": [12, 15, "HelloWorld"],
-        "complianceLevel": "compliant",
-        "securityRecommendationID": "BDC-124"
-      },
-      {
-        "type": "CertificateSetting",
-        "name": "clien-certificate",
-        "label": "Client Certificate",
-        "value": {
-            "CN": "...",
-            "CA": "...",
-            "...": "..."
+    "settingsGroup" {                                 /* Settings Group to group multiple related settings together */
+      "name": "IAS_SSO_SETTINGS",           
+      "label": "Identity and Authentication Single-Sign-On Settings",
+      "settings": [
+        {
+          "type": "StringSetting",                    /* Basic typed settings for String, Number, Boolean, etc. settings. */
+          "name": "mySetting",
+          "label": "My Setting",
+          "value": "some string value",
+          "complianceLevel": "compliant",             /* enum of: compliant, non-compliant, partially-compliant, etc. */
+          "securityRecommendationID": "BDC-124"
+        },
+        {
+          "type": "IntegerSetting",
+          "name": "retentionPeriodInDays",
+          "label": "Retention Period (Days)",
+          "value": 30,
+          "complianceLevel": "compliant",
+          "securityRecommendationID": "BDC-124"
+        },
+        {
+          "type": "NumberSetting",
+          "name": "myFloatingPointSetting",
+          "label": "Some Floating Point Value",
+          "value": 1.0,
+          "complianceLevel": "compliant",
+          "securityRecommendationID": "BDC-124"
+        },
+        {
+          "type": "BooleanSetting",
+          "name": "myBooleanSetting",
+          "label": "Enable SSO",
+          "value": false,
+          "complianceLevel": "non-compliant",
+          "securityRecommendationID": "BDC-124"
+        },
+        {
+          "type": "ArraySetting",
+          "name": "MyArraySetting",
+          "label": "Some list of values.",
+          "value": [12, 15, "HelloWorld"],
+          "complianceLevel": "compliant",
+          "securityRecommendationID": "BDC-124"
+        },
+        {
+          "type": "ObjectSetting",
+          "name": "MyObjectSetting",
+          "label": "Some complex configuration object defined by customer.",
+          "value": { 
+              "someKey"      : "someValue",
+              "someOtherKey" : "someOtherValue"
+          },
+          "complianceLevel": "compliant",
+          "securityRecommendationID": "BDC-124"
+        },
+        {
+          "type": "CertificateSetting",           /* Specific structure for recurring concepts, e.g. a certificate, a credential, etc. */
+          "name": "clien-certificate",
+          "label": "Client Certificate",
+          "value": {
+              "CN": "...",
+              "CA": "...",
+              "Expires" : "...",
+              "...": "..."
+          }
         }
-      }
-      /* and more */ 
-    ]
+        /* and more */ 
+      ]
+    } 
   }
