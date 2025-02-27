@@ -4,7 +4,7 @@
     "serviceInstanceId": "4711",
     "tenantId": "customer tenant ID",
 
-    "settingsGroup" {                                 /* Settings Group to group multiple related settings together */
+    "settingsGroup" : {                                 /* Settings Group to group multiple related settings together */
       "name": "IAS_SSO_SETTINGS",           
       "label": "Identity and Authentication Single-Sign-On Settings",
       "settings": [
