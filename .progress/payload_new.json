@@ -1,0 +1,118 @@
+{
+    "serviceName" : "Identity and Authentication Service",
+    "serviceId" : "093274", 
+    "serviceInstanceId": "4711",
+    "tenantId": "customer tenant ID",
+
+    "settingsGroup" : {                                 /* Settings Group to group multiple related settings together */
+        "name": "IAS_SSO_SETTINGS",           
+        "label": "Identity and Authentication Single-Sign-On Settings",
+        "settings": [
+        {
+            "type": "StringSetting",                    /* Basic typed settings for String, Number, Boolean, etc. settings. */
+            "name": "PASSWORD_POLICY_NAME",
+            "label": "Password Policy",
+            "value": "some password policy",
+            "complianceLevel": "compliant",             /* enum of: compliant, non-compliant, partially-compliant, etc. */
+            "securityRecommendationID": "BDC-124"
+        },
+        {
+            "type": "StringSetting",                    /* Basic typed settings for String, Number, Boolean, etc. settings. */
+            "name": "PASSWORD_POLICY_STRENGTH",
+            "label": "Password Policy Strength",
+            "value": "weak",
+            "complianceLevel": "non-compliant",             /* enum of: compliant, non-compliant, partially-compliant, etc. */
+            "securityRecommendationID": "BDC-124"
+        },
+        {
+            "type": "IntegerSetting",
+            "name": "MINIMUM_PASSWORD_LENGTH",
+            "label": "Minimum Password Length",
+            "value": 5,
+            "complianceLevel": "compliant",
+            "securityRecommendationID": "BDC-124"
+        },
+        {
+            "type": "IntegerSetting",
+            "name": "MAXIMUM_PASSWORD_LENGTH",
+            "label": "Maximum Password Length",
+            "value": 20,
+            "complianceLevel": "compliant",
+            "securityRecommendationID": "BDC-124"
+        },
+        {
+            "type": "IntegerSetting",
+            "name": "MINIMUM_PASSWORD_AGE_HOURS",
+            "label": "Minmum Password Age (Hours)",
+            "value": 3,
+            "complianceLevel": "compliant",
+            "securityRecommendationID": "BDC-124"
+        },
+        {
+            "type": "IntegerSetting",
+            "name": "MAXIMUM_PASSWORD_AGE_MONTHS",
+            "label": "Maximum Password Age (Months)",
+            "value": 12,
+            "complianceLevel": "compliant",
+            "securityRecommendationID": "BDC-124"
+        },
+        {
+            "type": "IntegerSetting",
+            "name": "USER_INACTIVITY_MONTHS",
+            "label": "Maximum User Inactivity (Months)",
+            "value": 3,
+            "complianceLevel": "compliant",
+            "securityRecommendationID": "BDC-124"
+        },
+        {
+            "type": "IntegerSetting",
+            "name": "MAXIMUM_PASSWORD_LENGTH",
+            "label": "Maximum Password Length",
+            "value": 20,
+            "complianceLevel": "compliant",
+            "securityRecommendationID": "BDC-124"
+        },
+        {
+            "type": "IntegerSetting",
+            "name": "PASSWORD_HISTORY_ENTRY_COUNT",
+            "label": "Password history count",
+            "value": 5,
+            "complianceLevel": "compliant",
+            "securityRecommendationID": "BDC-124"
+        },
+        {
+            "type": "IntegerSetting",
+            "name": "FAILED_SIGN_IN_ATTEMPTS",
+            "label": "Failed Sign In Attempts",
+            "value": 3,
+            "complianceLevel": "compliant",
+            "securityRecommendationID": "BDC-124"
+        },
+        {
+            "type": "IntegerSetting",
+            "name": "PASSWORD_LOCKED_PERIOD_HOURS",
+            "label": "Locked Perioud Hours",
+            "value": 3,
+            "complianceLevel": "compliant",
+            "securityRecommendationID": "BDC-124"
+        },
+        {
+            "type": "StringSetting",
+            "name": "REQUIRED_CHARACTER_GROUPS",
+            "label": "Required Character Groups",
+            "value": "[a-z0-9]*",
+            "complianceLevel": "compliant",
+            "securityRecommendationID": "BDC-124"
+        },
+        {
+            "type": "StringSetting",
+            "name": "PASSWORD_BEHAVIOUR",
+            "label": "Password Behavior",
+            "value": "decent :)",
+            "complianceLevel": "compliant",
+            "securityRecommendationID": "BDC-124"
+        }
+        ]
+    } 
+}
+

@@ -1,0 +1,71 @@
+{
+    "serviceName" : "Identity and Authentication Service",
+    "serviceId" : "093274", 
+    "serviceInstanceId": "4711",
+    "tenantId": "customer tenant ID",
+
+    // see: https://wiki.one.int.sap/wiki/display/CXSDEV/DCI+CSA+-+Cloud+Services#DCICSACloudServices-StoreIAS_CONFIG_SECREC(S00171)
+    
+    "IAS_PASSWORD_POLICIES" : {
+        "PASSWORD_POLICY_NAME" : {
+           "value" : "some name",
+           "secRecId" : "BCD-1234",
+           "status" : "compliant" 
+        },
+        "PASSWORD_POLICY_STRENGTH" : {
+            "value": "weak",
+            "secRecId" : "BCD-1234",
+            "status" : "non-compliant" 
+        },
+        "MINIMUM_PASSWORD_LENGTH" : {
+            "value": 5,
+            "secRecId" : "BCD-1234",
+            "status" : "compliant" 
+        },
+        "MAXIMUM_PASSWORD_LENGTH" : {
+            "value": 20,
+            "secRecId" : "BCD-1234",
+            "status" : "compliant" 
+        },
+        "MINIMUM_PASSWORD_AGE_HOURS" : {
+            "value": 36,
+            "secRecId" : "BCD-1234",
+            "status" : "compliant" 
+        },
+        "MAXIMUM_PASSWORD_AGE_MONTHS" : {
+            "value": 12,
+            "secRecId" : "BCD-1234",
+            "status" : "compliant" 
+        },
+        "USER_INACTIVITY_MONTHS" : {
+            "value": 3,
+            "secRecId" : "BCD-1234",
+            "status" : "compliant"
+        },
+        "PASSWORD_HISTORY_ENTRY_COUNT" : {
+            "value": 5,
+            "secRecId" : "BCD-1234",
+            "status" : "compliant"
+        },
+        "FAILED_SIGN_IN_ATTEMPTS" : {
+            "value": 3,
+            "secRecId" : "BCD-1234",
+            "status" : "compliant"
+        },
+        "PASSWORD_LOCKED_PERIOD_HOURS" : {
+            "value": 3,
+            "secRecId" : "BCD-1234",
+            "status" : "compliant"
+        },
+        "REQUIRED_CHARACTER_GROUPS" : {
+            "value": "[a-z0-9]*",
+            "secRecId" : "BCD-1234",
+            "status" : "compliant"
+        },
+        "PASSWORD_BEHAVIOUR" : {
+            "value": "decent :)",
+            "secRecId" : "BCD-1234",
+            "status" : "compliant"
+        }
+    }
+}
